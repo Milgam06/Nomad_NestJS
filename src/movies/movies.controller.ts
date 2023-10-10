@@ -1,4 +1,12 @@
-import { Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 
 @Controller('movies') // Controller 이름이 이 펑션의 기본 엔트리 포인트가 됨  ex) localhost:3000/{Controller name}
 export class MoviesController {
@@ -13,8 +21,10 @@ export class MoviesController {
   }
 
   @Post()
-  create() {
-    return 'This will create a movie';
+  create(@Body() movieData) {
+    //우리가 쓴 body값을 불러옴
+    console.log(movieData);
+    return movieData;
   }
 
   @Delete('/:id')
@@ -23,7 +33,10 @@ export class MoviesController {
   }
 
   @Patch('/:id') //Patch는 리소스의 일부만 업데이트하고 Put은 모든 리소스를 업데이트
-  patch(@Param('id') patchId: string) {
-    return `This will patch a movie what id is ${patchId}`;
+  patch(@Param('id') patchId: string, @Body() updateData) {
+    return {
+      updateMovieId: patchId,
+      ...updateData,
+    };
   }
 }
