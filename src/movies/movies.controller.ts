@@ -8,12 +8,16 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
+import { Movie } from './entities/movie.entity';
+import { MoviesService } from './movies.service';
 
 @Controller('movies') // Controller 이름이 이 펑션의 기본 엔트리 포인트가 됨  ex) localhost:3000/{Controller name}
 export class MoviesController {
+  constructor(private readonly movieService: MoviesService) {} //MovieService를 읽기전용으로 movieService에 불러옴
+
   @Get()
-  getAll() {
-    return 'This will return all movies';
+  getAll(): Movie[] {
+    return this.movieService.getAllMov();
   }
 
   @Get('search')
@@ -23,8 +27,8 @@ export class MoviesController {
   }
 
   @Get(':id')
-  getOne(@Param('id') movied: string) {
-    return `This will return ${movied} movie`;
+  getOne(@Param('id') movieId: string) {
+    return this.movieService.getOneMov(movieId);
   }
 
   @Post()
