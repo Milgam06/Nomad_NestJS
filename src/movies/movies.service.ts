@@ -3,7 +3,7 @@ import { Movie } from './entities/movie.entity';
 
 @Injectable()
 export class MoviesService {
-  private movies: Movie[] = []; //movie를 entity의 Movie[]형식으로 불러오기
+  private movies: Movie[] = []; //movie을 entity의 Movie[]형식으로
 
   getAllMov(): Movie[] {
     return this.movies;
