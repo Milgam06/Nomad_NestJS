@@ -40,7 +40,7 @@ export class MoviesController {
 
   @Delete(':id')
   remove(@Param('id') deleteId: string) {
-    return `This will delete a movie what id is ${deleteId}`;
+    return this.movieService.deleteOneMov(deleteId);
   }
 
   @Patch(':id') //Patch는 리소스의 일부만 업데이트하고 Put은 모든 리소스를 업데이트
